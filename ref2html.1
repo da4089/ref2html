@@ -1,0 +1,63 @@
+.\" name sect foot-centre foot-left  head-centre   origin  architecture
+.TH xguess 1  "March 2003"  "GNU"  "GNU" "GNU" "Unix"
+.SH NAME
+ref2html \- generate HTML references list
+.SH SYNOPSIS
+.BR "ref2html" " -p ref-file"
+.SH FLAGS
+.LP
+.TP 4
+\-h
+prints a simple description of legal syntax and functions.
+.TP 4
+\-v
+prints the version number of the program.
+.TP 4
+\-p
+specify the location of the bibliographic database in
+.BR refer (1)
+format.
+.\"
+.SH DESCRIPTION
+.LP
+.B ref2html
+produces very simply formatted HTML output, consisting of a list of
+citations matching the reference labels supplied on the standard
+input.
+.LP
+The output has no leading or trailing structure -- it is simple HTML,
+suitable for inclusion into an automatically generated paper body.
+.\"
+.SH EXIT CODES
+.PP
+.TP 8
+0
+Returned a result with no errors detected.
+.TP 8
+1
+Returned after detecting an error.  The output could be unreliable.
+.\"
+.SH EXAMPLE
+.LP
+Given a
+.BR troff (1)
+source file using the \fBme\fP macros, the following segment of a
+Makefile will produce HTML source code for the bibliography.
+.LP
+.EX 4
+paper.bib: paper.troff
+        grep '\[\]' < $< | cut -b 4- | sort | uniq | ref2html -p bib.ref > $@
+.EE
+.\"
+.SH "SEE ALSO"
+.PP
+.BR grefer (1),
+.BR groff (1),
+.BR groff_me (7),
+.BR refer (1), 
+.BR troff (1).
+.\"
+.SH AUTHOR
+.LP
+David Arnold, (davida@pobox.com)
+.\" ***************************************************************
