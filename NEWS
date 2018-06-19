@@ -1,5 +1,9 @@
 ref2html
 
-28 March 2003  David Arnold <davida@pobox.com>
+28 March 2003  David Arnold <d@0x1.org>
 - 1.0.0
-  - first real release
+  - First real release
+
+19 June 2018  David Arnold <d@0x1.org>
+- 1.1.0
+  - Fixed errors in man page.

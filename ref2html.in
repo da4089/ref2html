@@ -3,9 +3,7 @@
 #
 # Project:     ref2html
 #
-# File:        $Source: /Users/d/work/personal/cvs-import/CVS/ref2html/ref2html.in,v $
-# Version:     $RCSfile: ref2html.in,v $ $Revision: 1.1 $
-# Copyright:   (C) 1999-2003, David Arnold.
+# Copyright:   (C) 1999-2018, David Arnold.
 #
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -34,10 +32,10 @@ import os, string, sys
 
 
 #############################################################################
-VERSION = "@VERSION@"
+VERSION = "1.1.0"
 
 USAGE = """Usage: %s -p ref-file
-        
+
 Supply a list of references on stdin, and the formatted HTML source
 is written to stdout.
 
@@ -67,7 +65,7 @@ class Reference:
 
     def set_city(self, c):
         self._city = c
-        
+
     def set_date(self, d):
         self._date = d
 
@@ -79,7 +77,7 @@ class Reference:
 
     def set_keywords(self, k):
         self._keywords = k
-        
+
     def set_label(self, l):
         self._label = l
 
@@ -94,13 +92,13 @@ class Reference:
 
     def set_report(self, r):
         self._report = r
-        
+
     def set_title(self, t):
         self._title = t
 
     def set_volume(self, v):
         self._volume = v
-        
+
     def authors(self):
         if len(self._lst_a) == 1:
             return self._lst_a[0]
@@ -110,7 +108,7 @@ class Reference:
             return reduce(lambda s,a: s+", "+a,
                           self._lst_a[1:-1],
                           self._lst_a[0]) + " and " + self._lst_a[-1]
-            
+
     def label(self):
         return self._label
 
@@ -126,10 +124,10 @@ class Reference:
 
             if self._volume:
                 fp.write("<b>%s</b> " % self._volume)
-                
+
             if self._number:
                 fp.write("(%s) " % self._number)
-                
+
             if self._pages:
                 fp.write("pp.&nbsp;%s " % self._pages)
 
@@ -144,16 +142,16 @@ class Reference:
 
             if self._other:
                 fp.write("%s " % self._other)
-            
+
 
         else:                   #-- other
             if self._other:
                 fp.write("%s " % self._other)
-                
-        
+
+
         if self._date:
             fp.write("(%s).\n" % self._date)
-            
+
         fp.write("    <p>\n\n")
         return
 
@@ -175,9 +173,9 @@ def usage(prog, error):
     fd.write(m)
     return
 
-    
+
 #############################################################################
-    
+
 if __name__ == "__main__":
 
     #-- initialise
@@ -207,7 +205,7 @@ if __name__ == "__main__":
             else:
                 usage(sys.argv[0], "-p needs bibliography file argument")
                 sys.exit(1)
-        
+
         else:
             usage(sys.argv[0], "Unknown option: %s" % arg)
             sys.exit(1)
@@ -216,7 +214,7 @@ if __name__ == "__main__":
     if not ref_file:
         usage(sys.argv[0], "missing -p parameter")
         sys.exit(1)
-        
+
     try:
         ref_db = open(ref_file, "r")
     except:
@@ -235,7 +233,7 @@ if __name__ == "__main__":
             db[item.label()] = item
             item = Reference()
             continue
-        
+
         if line[0] != "%":
             sys.stderr.write("format error in database: line %d\n" % idx)
             sys.stderr.write("    %s\n" % (line))
@@ -288,7 +286,7 @@ if __name__ == "__main__":
 
         sys.stdout.write("</dl>\n\n")
 
-        
+
     sys.exit(0)
 
 
